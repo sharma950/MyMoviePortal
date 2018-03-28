@@ -9,26 +9,29 @@ import org.springframework.stereotype.Service;
 
 import com.mymovieportal.dao.CityDAO;
 import com.mymovieportal.model.City;
+import com.mymovieportal.repository.CityRepository;
 import com.mymovieportal.service.CityService;
 
 @Service
 public class CityServiceImpl implements CityService {
 
     @Autowired
-    CityDAO cityDao;
+    CityRepository cityRepository;
 
     @Override
     @Transactional
     public City getCity(String cityId) {
         // TODO Auto-generated method stub
-        return cityDao.getCity(cityId);
+    	City city = cityRepository.findByCityId(cityId);
+        return city;
     }
 
     @Override
     @Transactional
     public List<City> getCities() {
         // TODO Auto-generated method stub
-        return cityDao.getCities();
+    	List<City> cityList = cityRepository.findAll();
+        return cityList;
     }
 
 }

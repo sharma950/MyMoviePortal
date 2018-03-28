@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mymovieportal.dao.UserDAO;
 import com.mymovieportal.model.User;
+import com.mymovieportal.repository.UserRepository;
 import com.mymovieportal.service.UserService;
 
 // TODO: Auto-generated Javadoc
@@ -18,13 +19,8 @@ import com.mymovieportal.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    /** The user dao. */
-    @Autowired
-    UserDAO userDao;
-
-    @Autowired
-    UserService userService;
-
+	@Autowired
+	UserRepository userRepository;
     /*
      * (non-Javadoc)
      *
@@ -35,7 +31,8 @@ public class UserServiceImpl implements UserService {
     public boolean registerUser(User user) {
         // TODO Auto-generated method stub
 
-        userDao.registerUser(user);
+        //userDao.registerUser(user);
+    	userRepository.save(user);
 
         return true;
     }
@@ -49,8 +46,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<User> getUsers() {
         // TODO Auto-generated method stub
-
-        return userDao.getUsers();
+    	List<User> userList = userRepository.findAll();
+        return userList;
 
     }
 
@@ -64,7 +61,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(long id) {
         // TODO Auto-generated method stub
 
-        User user = userDao.getUser(id);
+        User user = userRepository.findById(id);
 
         return user;
     }
@@ -78,8 +75,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public long loginChecking(String email, String password) {
         // TODO Auto-generated method stub
-
-        return userDao.loginChecking(email, password);
+    	User user = userRepository.findByEmailAndPassword(email, password);
+    	
+        return user.getId();
 
     }
 
@@ -93,12 +91,18 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(long id, User user) {
         // TODO Auto-generated method stub
 
-        try {
+        /*try {
             return userDao.updateUser(id, user);
         } catch (Exception ex) {
             System.out.println("error in UserServiceImpl updateUser()" + ex);
             return false;
-        }
+        }*/
+    	
+    	User updateUser = userRepository.save(user);
+    	if(updateUser != null){
+    		return true;
+    	}
+    	return false;
     }
 
     /*
@@ -111,7 +115,8 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(long id) {
         // TODO Auto-generated method stub
         try {
-            return userDao.deleteUser(id);
+            //return userDao.deleteUser(id);
+        	return true;
         } catch (Exception ex) {
             System.out.println("error in UserServiceImpl updateUser()" + ex);
             return false;
@@ -127,7 +132,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public boolean getContactNumber(String contactNumber) {
         // TODO Auto-generated method stub
-        return userDao.getContactNumber(contactNumber);
+      //  return userDao.getContactNumber(contactNumber);
+    	return true;
     }
 
     @Override
@@ -135,7 +141,16 @@ public class UserServiceImpl implements UserService {
     public boolean getEmailExistence(String email) {
         // TODO Auto-generated method stub
         email = email + ".com";
-        return userDao.getEmailExistence(email);
+        User user = userRepository.findByEmail(email);
+        if(user != null)
+        {
+        	return true;
+        }
+        return false;
     }
 
+    public boolean deleteUser(User user){
+    	userRepository.delete(user);
+    	return true;
+    }
 }

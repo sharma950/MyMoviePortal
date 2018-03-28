@@ -9,32 +9,37 @@ import org.springframework.stereotype.Service;
 
 import com.mymovieportal.dao.TheatreDAO;
 import com.mymovieportal.model.Theatre;
+import com.mymovieportal.repository.TheatreRepository;
 import com.mymovieportal.service.TheatreService;
 
 @Service
 public class TheatreServiceImpl implements TheatreService{
 
-    @Autowired
-    TheatreDAO theatreDao;
+    @Autowired 
+    TheatreRepository theatreRepository;
+    
     @Override
     @Transactional
     public Theatre getTheatre(String theatreId) {
         // TODO Auto-generated method stub
-        return theatreDao.getTheatre(theatreId);
+    	Theatre theatre = theatreRepository.findByTheatreId(theatreId);
+        return theatre;
     }
 
     @Override
     @Transactional
     public List<Theatre> getTheatres() {
         // TODO Auto-generated method stub
-        return theatreDao.getTheatres();
+    	List<Theatre> theatreList = theatreRepository.findAll();
+        return theatreList;
     }
 
     @Override
     @Transactional
     public List<Theatre> getTheatresByCity(String cityId) {
         // TODO Auto-generated method stub
-        return theatreDao.getTheatresByCity(cityId);
+    	List<Theatre> theatreList = theatreRepository.findByCityId(cityId);
+        return theatreList;
     }
 
 }
