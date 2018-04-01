@@ -13,36 +13,56 @@ import org.springframework.stereotype.Repository;
 import com.mymovieportal.dao.CityDAO;
 import com.mymovieportal.model.City;
 
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CityDAOImpl.
+ */
 @Repository
 @Transactional
 public class CityDAOImpl implements CityDAO {
-    @Autowired
-    private SessionFactory sessionFactory;
 
-    private Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+	/** The session factory. */
+	@Autowired
+	private SessionFactory sessionFactory;
 
-    @Override
-    public City getCity(String cityId) {
-        // TODO Auto-generated method stub
+	/**
+	 * Gets the session.
+	 *
+	 * @return the session
+	 */
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
-        try {
-            City city = getSession().get(City.class, cityId);
-            return city;
-        } catch (Exception ex) {
-            System.out.println("error in CityDAOImpl getCity() " + ex);
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.mymovieportal.dao.CityDAO#getCity(java.lang.String)
+	 */
+	@Override
+	public City getCity(String cityId) {
+		// TODO Auto-generated method stub
 
-    @Override
-    public List<City> getCities() {
-        // TODO Auto-generated method stub
-        Query query = getSession().createQuery("from City");
-        List<City> cityList = query.list();
-        return cityList;
-    }
+		try {
+			City city = getSession().get(City.class, cityId);
+			return city;
+		} catch (Exception ex) {
+			System.out.println("error in CityDAOImpl getCity() " + ex);
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.mymovieportal.dao.CityDAO#getCities()
+	 */
+	@Override
+	public List<City> getCities() {
+		// TODO Auto-generated method stub
+		Query query = getSession().createQuery("from City");
+		List<City> cityList = query.list();
+		return cityList;
+	}
 
 }

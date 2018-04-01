@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.mymovieportal.dao.UserDAO;
 import com.mymovieportal.model.User;
-import com.mymovieportal.repository.UserRepository;
 import com.mymovieportal.service.UserService;
 
 // TODO: Auto-generated Javadoc
@@ -19,138 +18,147 @@ import com.mymovieportal.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
+	/** The user dao. */
 	@Autowired
-	UserRepository userRepository;
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#registerUser(com.mymovieportal.model.User)
-     */
-    @Override
-    @Transactional
-    public boolean registerUser(User user) {
-        // TODO Auto-generated method stub
+	UserDAO userDao;
 
-        //userDao.registerUser(user);
-    	userRepository.save(user);
+	/** The user service. */
+	@Autowired
+	UserService userService;
 
-        return true;
-    }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.mymovieportal.service.UserService#registerUser(com.mymovieportal.model.
+	 * User)
+	 */
+	@Override
+	@Transactional
+	public boolean registerUser(User user) {
+		// TODO Auto-generated method stub
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#getUsers()
-     */
-    @Override
-    @Transactional
-    public List<User> getUsers() {
-        // TODO Auto-generated method stub
-    	List<User> userList = userRepository.findAll();
-        return userList;
+		userDao.registerUser(user);
 
-    }
+		return true;
+	}
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#getUser(long)
-     */
-    @Override
-    @Transactional
-    public User getUser(long id) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#getUsers()
+	 */
+	@Override
+	@Transactional
+	public List<User> getUsers() {
+		// TODO Auto-generated method stub
 
-        User user = userRepository.findById(id);
+		return userDao.getUsers();
 
-        return user;
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#loginChecking(java.lang.String, java.lang.String)
-     */
-    @Override
-    @Transactional
-    public long loginChecking(String email, String password) {
-        // TODO Auto-generated method stub
-    	User user = userRepository.findByEmailAndPassword(email, password);
-    	
-        return user.getId();
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#getUser(long)
+	 */
+	@Override
+	@Transactional
+	public User getUser(long id) {
+		// TODO Auto-generated method stub
 
-    }
+		User user = userDao.getUser(id);
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#updateUser(long, com.mymovieportal.model.User)
-     */
-    @Override
-    @Transactional
-    public boolean updateUser(long id, User user) {
-        // TODO Auto-generated method stub
+		return user;
+	}
 
-        /*try {
-            return userDao.updateUser(id, user);
-        } catch (Exception ex) {
-            System.out.println("error in UserServiceImpl updateUser()" + ex);
-            return false;
-        }*/
-    	
-    	User updateUser = userRepository.save(user);
-    	if(updateUser != null){
-    		return true;
-    	}
-    	return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#loginChecking(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	@Transactional
+	public long loginChecking(String email, String password) {
+		// TODO Auto-generated method stub
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#deleteUser(long)
-     */
-    @Override
-    @Transactional
-    public boolean deleteUser(long id) {
-        // TODO Auto-generated method stub
-        try {
-            //return userDao.deleteUser(id);
-        	return true;
-        } catch (Exception ex) {
-            System.out.println("error in UserServiceImpl updateUser()" + ex);
-            return false;
-        }
-    }
+		return userDao.loginChecking(email, password);
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.mymovieportal.service.UserService#getContactNumber(java.lang.String)
-     */
-    @Override
-    @Transactional
-    public boolean getContactNumber(String contactNumber) {
-        // TODO Auto-generated method stub
-      //  return userDao.getContactNumber(contactNumber);
-    	return true;
-    }
+	}
 
-    @Override
-    @Transactional
-    public boolean getEmailExistence(String email) {
-        // TODO Auto-generated method stub
-        email = email + ".com";
-        User user = userRepository.findByEmail(email);
-        if(user != null)
-        {
-        	return true;
-        }
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#updateUser(long,
+	 * com.mymovieportal.model.User)
+	 */
+	@Override
+	@Transactional
+	public boolean updateUser(long id, User user) {
+		// TODO Auto-generated method stub
 
-    public boolean deleteUser(User user){
-    	userRepository.delete(user);
-    	return true;
-    }
+		try {
+			return userDao.updateUser(id, user);
+		} catch (Exception ex) {
+			// System.out.println("error in UserServiceImpl updateUser()" + ex);
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#deleteUser(long)
+	 */
+	@Override
+	@Transactional
+	public boolean deleteUser(long id) {
+		// TODO Auto-generated method stub
+		try {
+			return userDao.deleteUser(id);
+		} catch (Exception ex) {
+			// System.out.println("error in UserServiceImpl updateUser()" + ex);
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.mymovieportal.service.UserService#getContactNumber(java.lang.String)
+	 */
+	@Override
+	@Transactional
+	public boolean getContactNumber(String contactNumber) {
+		// TODO Auto-generated method stub
+		return userDao.getContactNumber(contactNumber);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mymovieportal.service.UserService#getEmailExistence(java.lang.String)
+	 */
+	@Override
+	@Transactional
+	public boolean getEmailExistence(String email) {
+		// TODO Auto-generated method stub
+		// email = email + ".com";
+		return userDao.getEmailExistence(email);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.mymovieportal.service.UserService#getPassword(java.lang.String)
+	 */
+	@Override
+	public String getPassword(String email) {
+		// TODO Auto-generated method stub
+		// email = email + ".com";
+		return userDao.getPassword(email);
+	}
+
 }

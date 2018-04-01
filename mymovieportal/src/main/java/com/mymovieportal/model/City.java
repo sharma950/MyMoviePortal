@@ -5,36 +5,67 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class City.
+ */
 @Entity
 @Table(name = "city")
 public class City {
 
-    public String getCityId() {
-        return cityId;
-    }
+	/** The city id. */
+	@Id
+	@Column(name = "city_id")
+	private String cityId;
 
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
-    }
+	/** The city name. */
+	@Column(name = "city_name")
+	private String cityName;
 
-    public String getCityName() {
-        return cityName;
-    }
+	/**
+	 * Gets the city id.
+	 *
+	 * @return the city id
+	 */
+	public String getCityId() {
+		return cityId;
+	}
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
+	/**
+	 * Sets the city id.
+	 *
+	 * @param cityId
+	 *            the new city id
+	 */
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
 
-    public City() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Gets the city name.
+	 *
+	 * @return the city name
+	 */
+	public String getCityName() {
+		return cityName;
+	}
 
-    @Id
-    @Column(name = "city_id")
-    private String cityId;
+	/**
+	 * Sets the city name.
+	 *
+	 * @param cityName
+	 *            the new city name
+	 */
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
 
-    @Column(name = "city_name")
-    private String cityName;
+	/**
+	 * Instantiates a new city.
+	 */
+	public City() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 }

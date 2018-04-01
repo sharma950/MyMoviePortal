@@ -13,27 +13,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mymovieportal.model.City;
 import com.mymovieportal.service.CityService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CityController.
+ */
 @RestController
 @RequestMapping("/mymovieportal/city")
 public class CityController {
-    @Autowired
-    CityService cityService;
 
-    @RequestMapping(value = "/getCity/{cityId}", method = RequestMethod.GET)
-    public ResponseEntity<City> get(@PathVariable("cityId") String cityId) {
-        City city = cityService.getCity(cityId);
-        if (city != null) {
-            return ResponseEntity.ok().body(city);
-        } else {
-            City city1 = new City();
-            return ResponseEntity.ok().body(city1);
-        }
+	/** The city service. */
+	@Autowired
+	CityService cityService;
 
-    }
+	/**
+	 * Gets the.
+	 *
+	 * @param cityId
+	 *            the city id
+	 * @return the response entity
+	 */
+	@RequestMapping(value = "/getCity/{cityId}", method = RequestMethod.GET)
+	public ResponseEntity<City> get(@PathVariable("cityId") String cityId) {
+		City city = cityService.getCity(cityId);
+		if (city != null) {
+			return ResponseEntity.ok().body(city);
+		} else {
+			City city1 = new City();
+			return ResponseEntity.ok().body(city1);
+		}
 
-    @RequestMapping(value = "/getCities", method = RequestMethod.GET)
-    public @ResponseBody List<City> getCities() {
-        List<City> cityList = cityService.getCities();
-        return cityList;
-    }
+	}
+
+	/**
+	 * Gets the cities.
+	 *
+	 * @return the cities
+	 */
+	@RequestMapping(value = "/getCities", method = RequestMethod.GET)
+	public @ResponseBody List<City> getCities() {
+		List<City> cityList = cityService.getCities();
+		return cityList;
+	}
 }

@@ -31,9 +31,11 @@ repositories {
 
 dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: '0.3.4'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.6.1'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-mail')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

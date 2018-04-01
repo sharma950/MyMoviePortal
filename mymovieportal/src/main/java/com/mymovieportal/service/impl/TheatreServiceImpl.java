@@ -7,39 +7,56 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mymovieportal.dao.TheatreDAO;
 import com.mymovieportal.model.Theatre;
 import com.mymovieportal.repository.TheatreRepository;
-import com.mymovieportal.service.TheatreService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TheatreServiceImpl.
+ */
 @Service
-public class TheatreServiceImpl implements TheatreService{
+public class TheatreServiceImpl {
 
-    @Autowired 
-    TheatreRepository theatreRepository;
-    
-    @Override
-    @Transactional
-    public Theatre getTheatre(String theatreId) {
-        // TODO Auto-generated method stub
-    	Theatre theatre = theatreRepository.findByTheatreId(theatreId);
-        return theatre;
-    }
+	/** The theatre repository. */
+	@Autowired
+	TheatreRepository theatreRepository;
 
-    @Override
-    @Transactional
-    public List<Theatre> getTheatres() {
-        // TODO Auto-generated method stub
-    	List<Theatre> theatreList = theatreRepository.findAll();
-        return theatreList;
-    }
+	/**
+	 * Gets the theatre.
+	 *
+	 * @param theatreId
+	 *            the theatre id
+	 * @return the theatre
+	 */
+	@Transactional
+	public Theatre getTheatre(String theatreId) {
+		// TODO Auto-generated method stub
+		Theatre theatre = theatreRepository.findByTheatreId(theatreId);
+		return theatre;
+	}
 
-    @Override
-    @Transactional
-    public List<Theatre> getTheatresByCity(String cityId) {
-        // TODO Auto-generated method stub
-    	List<Theatre> theatreList = theatreRepository.findByCityId(cityId);
-        return theatreList;
-    }
+	/**
+	 * Gets the theatres.
+	 *
+	 * @return the theatres
+	 */
+	@Transactional
+	public List<Theatre> getTheatres() {
+		// TODO Auto-generated method stub
+		return theatreRepository.findAll();
+	}
+
+	/**
+	 * Gets the theatres by city.
+	 *
+	 * @param cityId
+	 *            the city id
+	 * @return the theatres by city
+	 */
+	@Transactional
+	public List<Theatre> getTheatresByCity(String cityId) {
+		// TODO Auto-generated method stub
+		return theatreRepository.getTheatresByCity(cityId);
+	}
 
 }
