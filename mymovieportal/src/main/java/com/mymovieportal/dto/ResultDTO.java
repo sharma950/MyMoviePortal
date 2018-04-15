@@ -6,26 +6,25 @@ package com.mymovieportal.dto;
  */
 public class ResultDTO {
 
-	/** The result. */
-	private String result;
+    /** The result. */
+    private String result;
 
-	/**
-	 * Gets the result.
-	 *
-	 * @return the result
-	 */
-	public String getResult() {
-		return result;
-	}
+    /**
+     * Gets the result.
+     *
+     * @return the result
+     */
+    public String getResult() {
+        return result;
+    }
 
-	/**
-	 * Sets the result.
-	 *
-	 * @param result
-	 *            the new result
-	 */
-	public void setResult(String result) {
-		this.result = result;
-	}
+    /**
+     * Sets the result.
+     *
+     * @param result the new result
+     */
+    public void setResult(String result) {
+        this.result = result;
+    }
 
 }

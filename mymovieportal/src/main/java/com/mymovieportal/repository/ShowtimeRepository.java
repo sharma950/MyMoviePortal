@@ -1,6 +1,5 @@
 package com.mymovieportal.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,18 +14,19 @@ import com.mymovieportal.model.Showtime;
  */
 public interface ShowtimeRepository extends JpaRepository<Showtime, Integer> {
 
-	/**
-	 * Gets the show time.
-	 *
-	 * @return the show time
-	 */
-	@Query("Select DATE_FORMAT(showTimeValue, '%d-%m-%y %h:%i:%s') from Showtime where showTimeId in"
-			+ "(select mtShowtimeId from MovieTheatre where mtMovieId= :movieId and mtTheatreId= :theatreId)")
-	List<String> getShowTime(@Param("movieId") String movieId, @Param("theatreId") String theatreId);
+    /**
+     * Gets the show time.
+     *
+     * @param movieId the movie id
+     * @param theatreId the theatre id
+     * @return the show time
+     */
+    @Query("select  DATE_FORMAT(showTimeValue, '%d-%m-%y %H:%i:%s') from Showtime where showTimeId in"
+        + "(select mtShowtimeId from MovieTheatre where mtMovieId=:movieId and mtTheatreId=:theatreId)")
+    List<String> getShowTime(@Param("movieId") String movieId,@Param("theatreId") String theatreId);
 
-	/*
-	 * @Query("select mtShowtimeId from MovieTheatre where where mtMovieId=:movieId and mtTheatreId=:theatreId)"
-	 * ) String getShowId(String movieId, String theatreId);
-	 */
 
+
+//@Query("select DATE_FORMAT(showTimeValue, '%d-%m-%y %h:%i:%s') from Showtime where showTimeId in"
+//+ "(select mtShowtimeId from MovieTheatre where mtMovieId=:movieId and mtTheatreId=:theatreId)")
 }

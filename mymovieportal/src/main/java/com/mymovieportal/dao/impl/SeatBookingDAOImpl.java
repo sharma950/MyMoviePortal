@@ -23,61 +23,86 @@ import com.mymovieportal.model.SeatBooking;
 @Transactional
 public class SeatBookingDAOImpl implements SeatBookingDAO {
 
-	/** The session factory. */
-	@Autowired
-	private SessionFactory sessionFactory;
+    /** The session factory. */
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	/**
-	 * Gets the session.
-	 *
-	 * @return the session
-	 */
-	private Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+    /**
+     * Gets the session.
+     *
+     * @return the session
+     */
+    private Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.mymovieportal.dao.SeatBookingDAO#getSeatName(com.mymovieportal.model.
-	 * SeatBooking)
-	 */
-	@Override
-	public List<String> getSeatName(SeatBooking seatbooking) {
-		// TODO Auto-generated method stub
-		String sbCityId = seatbooking.getSbCityId();
-		String sbTheatreId = seatbooking.getSbTheatreId();
-		String sbMovieId = seatbooking.getSbMovieId();
-		String sbShowId = seatbooking.getSbShowtimeId();
-		String myquery = "from SeatBooking where sbCityId=:cityId and sbTheatreId=:theatreId and sbMovieId=:movieId and sbShowtimeId=:showId";
-		Query query = getSession().createQuery(myquery);
-		query.setParameter("cityId", sbCityId);
-		query.setParameter("theatreId", sbTheatreId);
-		query.setParameter("movieId", sbMovieId);
-		query.setParameter("showId", sbShowId);
-		List<SeatBooking> seatList = query.list();
-		Iterator<SeatBooking> seatItr = seatList.iterator();
-		List<String> seatsName = new ArrayList();
-		SeatBooking seat;
-		while (seatItr.hasNext()) {
-			seat = seatItr.next();
-			seatsName.add(seat.getSeatName());
-		}
-		return seatsName;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.mymovieportal.dao.SeatBookingDAO#getSeatName(com.mymovieportal.model.SeatBooking)
+     */
+    @Override
+    public List<String> getSeatName(SeatBooking seatbooking) {
+        // TODO Auto-generated method stub
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.mymovieportal.dao.SeatBookingDAO#setSeatName(com.mymovieportal.model.
-	 * SeatBooking)
-	 */
-	@Override
-	public String setSeatName(SeatBooking seatbooking) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        String sbCityId = seatbooking.getSbCityId();
+        String sbTheatreId = seatbooking.getSbTheatreId();
+        String sbMovieId = seatbooking.getSbMovieId();
+        String sbShowTime = seatbooking.getSbShowTime();
+        String sbDate = seatbooking.getSbDate();
 
+        String myquery =
+            "from SeatBooking where sbCityId=:cityId and sbTheatreId=:theatreId and sbMovieId=:movieId and "
+                + "sbShowTime=:showtime and sbDate=:date and sbStatus = 'booked'";
+        Query query = getSession().createQuery(myquery);
+        query.setParameter("cityId", sbCityId);
+        query.setParameter("theatreId", sbTheatreId);
+        query.setParameter("movieId", sbMovieId);
+        query.setParameter("showtime", sbShowTime);
+        query.setParameter("date", sbDate);
+
+        List<SeatBooking> seatList = query.list();
+        Iterator<SeatBooking> seatItr = seatList.iterator();
+        List<String> seatsName = new ArrayList();
+        while (seatItr.hasNext()) {
+            SeatBooking seat = seatItr.next();
+            seatsName.add(seat.getSeatName());
+        }
+        return seatsName;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.mymovieportal.dao.SeatBookingDAO#setSeatName(com.mymovieportal.model.SeatBooking)
+     */
+    @Override
+    public boolean setSeatName(SeatBooking[] seatbooking) {
+        // TODO Auto-generated method stub
+        for (int i = 0; i < seatbooking.length; i++) {
+            try {
+
+                seatbooking[i].setSbStatus("booked");
+                // TODO Auto-generated method stub
+                getSession().persist(seatbooking[i]);
+
+            } catch (Exception ex) {
+                // System.out.println("error in UseDAOImpl registerUser() " + ex);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public List<SeatBooking> getAllBookedSeat(String date, String time) {
+        String myquery =
+            "from SeatBooking where sbShowTime > :showtime and sbDate=:date and sbStatus = 'booked'";
+        Query query = getSession().createQuery(myquery);
+
+        query.setParameter("showtime", time);
+        query.setParameter("date", date);
+        return query.list();
+
+    }
 }

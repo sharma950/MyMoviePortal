@@ -13,59 +13,68 @@ import javax.persistence.Table;
 @Table(name = "theatre")
 public class Theatre {
 
-	/** The theatre id. */
-	@Id
-	@Column(name = "theatre_id")
-	private String theatreId;
+    /** The theatre id. */
+    @Id
+    @Column(name = "theatre_id")
+    private String theatreId;
 
-	/** The theatre name. */
-	@Column(name = "theatre_name")
-	private String theatreName;
+    /** The theatre name. */
+    @Column(name = "theatre_name")
+    private String theatreName;
 
-	/**
-	 * Instantiates a new theatre.
-	 */
-	public Theatre() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "theatre_status")
+    private String theatreStatus;
 
-	/**
-	 * Gets the theatre id.
-	 *
-	 * @return the theatre id
-	 */
-	public String getTheatreId() {
-		return theatreId;
-	}
+    /**
+     * Instantiates a new theatre.
+     */
+    public Theatre() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * Sets the theatre id.
-	 *
-	 * @param theatreId
-	 *            the new theatre id
-	 */
-	public void setTheatreId(String theatreId) {
-		this.theatreId = theatreId;
-	}
+    /**
+     * Gets the theatre id.
+     *
+     * @return the theatre id
+     */
+    public String getTheatreId() {
+        return theatreId;
+    }
 
-	/**
-	 * Gets the theatre name.
-	 *
-	 * @return the theatre name
-	 */
-	public String getTheatreName() {
-		return theatreName;
-	}
+    /**
+     * Sets the theatre id.
+     *
+     * @param theatreId the new theatre id
+     */
+    public void setTheatreId(String theatreId) {
+        this.theatreId = theatreId;
+    }
 
-	/**
-	 * Sets the theatre name.
-	 *
-	 * @param theatreName
-	 *            the new theatre name
-	 */
-	public void setTheatreName(String theatreName) {
-		this.theatreName = theatreName;
-	}
+    /**
+     * Gets the theatre name.
+     *
+     * @return the theatre name
+     */
+    public String getTheatreName() {
+        return theatreName;
+    }
+
+    /**
+     * Sets the theatre name.
+     *
+     * @param theatreName the new theatre name
+     */
+    public void setTheatreName(String theatreName) {
+        this.theatreName = theatreName;
+    }
+
+    public String getTheatreStatus() {
+        return theatreStatus;
+    }
+
+    public void setTheatreStatus(String theatreStatus) {
+        this.theatreStatus = theatreStatus;
+    }
 
 }

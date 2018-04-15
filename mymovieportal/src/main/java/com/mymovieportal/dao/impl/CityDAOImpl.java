@@ -21,48 +21,54 @@ import com.mymovieportal.model.City;
 @Transactional
 public class CityDAOImpl implements CityDAO {
 
-	/** The session factory. */
-	@Autowired
-	private SessionFactory sessionFactory;
+    /** The session factory. */
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	/**
-	 * Gets the session.
-	 *
-	 * @return the session
-	 */
-	private Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+    /**
+     * Gets the session.
+     *
+     * @return the session
+     */
+    private Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mymovieportal.dao.CityDAO#getCity(java.lang.String)
-	 */
-	@Override
-	public City getCity(String cityId) {
-		// TODO Auto-generated method stub
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.mymovieportal.dao.CityDAO#getCity(java.lang.String)
+     */
+    @Override
+    public City getCity(String cityId) {
+        // TODO Auto-generated method stub
 
-		try {
-			City city = getSession().get(City.class, cityId);
-			return city;
-		} catch (Exception ex) {
-			System.out.println("error in CityDAOImpl getCity() " + ex);
-			return null;
-		}
-	}
+        try {
+            City city = getSession().get(City.class, cityId);
+            return city;
+        } catch (Exception ex) {
+           // System.out.println("error in CityDAOImpl getCity() " + ex);
+            return null;
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mymovieportal.dao.CityDAO#getCities()
-	 */
-	@Override
-	public List<City> getCities() {
-		// TODO Auto-generated method stub
-		Query query = getSession().createQuery("from City");
-		List<City> cityList = query.list();
-		return cityList;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.mymovieportal.dao.CityDAO#getCities()
+     */
+    @Override
+    public List<City> getCities() {
+        // TODO Auto-generated method stub
+        Query query = getSession().createQuery("from City where cityStatus = 'active' ");
+        List<City> cityList = query.list();
+        return cityList;
+    }
+
+    @Override
+    public String getCityNameOnly(String cityId) {
+        City city = getSession().get(City.class, cityId);
+        return city.getCityName();
+    }
 
 }

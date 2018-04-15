@@ -13,59 +13,70 @@ import javax.persistence.Table;
 @Table(name = "city")
 public class City {
 
-	/** The city id. */
-	@Id
-	@Column(name = "city_id")
-	private String cityId;
+    /** The city id. */
+    @Id
+    @Column(name = "city_id")
+    private String cityId;
 
-	/** The city name. */
-	@Column(name = "city_name")
-	private String cityName;
+    /** The city name. */
+    @Column(name = "city_name")
+    private String cityName;
 
-	/**
-	 * Gets the city id.
-	 *
-	 * @return the city id
-	 */
-	public String getCityId() {
-		return cityId;
-	}
+    @Column(name = "city_status")
+    private String cityStatus;
 
-	/**
-	 * Sets the city id.
-	 *
-	 * @param cityId
-	 *            the new city id
-	 */
-	public void setCityId(String cityId) {
-		this.cityId = cityId;
-	}
+    /**
+     * Gets the city id.
+     *
+     * @return the city id
+     */
+    public String getCityId() {
+        return cityId;
+    }
 
-	/**
-	 * Gets the city name.
-	 *
-	 * @return the city name
-	 */
-	public String getCityName() {
-		return cityName;
-	}
+    /**
+     * Sets the city id.
+     *
+     * @param cityId the new city id
+     */
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
 
-	/**
-	 * Sets the city name.
-	 *
-	 * @param cityName
-	 *            the new city name
-	 */
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+    /**
+     * Gets the city name.
+     *
+     * @return the city name
+     */
+    public String getCityName() {
+        return cityName;
+    }
 
-	/**
-	 * Instantiates a new city.
-	 */
-	public City() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Sets the city name.
+     *
+     * @param cityName the new city name
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+
+
+    public String getCityStatus() {
+        return cityStatus;
+    }
+
+    public void setCityStatus(String cityStatus) {
+        this.cityStatus = cityStatus;
+    }
+
+    /**
+     * Instantiates a new city.
+     */
+    public City() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 }

@@ -1,6 +1,5 @@
 package com.mymovieportal.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mymovieportal.dto.MovieTheatreDTO;
 import com.mymovieportal.model.Movie;
-import com.mymovieportal.service.impl.MovieServiceImpl;
+import com.mymovieportal.service.MovieService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,51 +23,71 @@ import com.mymovieportal.service.impl.MovieServiceImpl;
 @RequestMapping("/mymovieportal/movie")
 public class MovieController {
 
-	/** The movie service impl. */
-	@Autowired
-	MovieServiceImpl movieServiceImpl;
+    /** The movie service impl. */
+    @Autowired
+    MovieService movieService;
 
-	/**
-	 * Gets the movies.
-	 *
-	 * @return the movies
-	 */
-	@RequestMapping(value = "/getMovies", method = RequestMethod.GET)
-	public @ResponseBody List<Movie> getMovies() {
+    /**
+     * Gets the movies.
+     *
+     * @return the movies
+     */
+    @RequestMapping(value = "/getMovies", method = RequestMethod.GET)
+    public @ResponseBody List<Movie> getMovies() {
 
-		List<Movie> movieList = movieServiceImpl.getMovies();
-		return movieList;
-	}
+        List<Movie> movieList = movieService.getMovies();
+        return movieList;
+    }
 
-	/**
-	 * Gets the movie by theatre.
-	 *
-	 * @param theatreId
-	 *            the theatre id
-	 * @return the movie by theatre
-	 */
-	@RequestMapping(value = "/getMovies/{theatreId}", method = RequestMethod.GET)
-	public @ResponseBody List<Movie> getMovieByTheatre(@PathVariable("theatreId") String theatreId) {
-		List<Movie> movieList = movieServiceImpl.getMoviesByTheatre(theatreId);
-		return movieList;
+    /**
+     * Gets the movie.
+     *
+     * @param movieId the movie id
+     * @return the movie
+     */
+    @RequestMapping(value = "/getMovie/{movieId}", method = RequestMethod.GET)
+    public @ResponseBody Movie getMovie(@PathVariable("movieId") String movieId) {
 
-	}
+        Movie movie = movieService.getMovie(movieId);
+        return movie;
+    }
 
-	/**
-	 * Gets the password.
-	 *
-	 * @param movieTheatreDTO
-	 *            the movie theatre DTO
-	 * @return the password
-	 */
-	@RequestMapping(value = "/getShowtime", method = RequestMethod.POST)
-	public @ResponseBody List<String> getShowTime(@RequestBody MovieTheatreDTO movieTheatreDTO) {
-		List<String> timeList = movieServiceImpl.getShowTime(movieTheatreDTO);
-		// ResultDTO rs = new ResultDTO();
-		// rs.setResult(time);
-		return timeList;
-		// return new ResponseEntity<>(new Gson().toJson(rs), HttpStatus.OK);
-	}
-	
-	
+    /**
+     * Gets the movie by theatre.
+     *
+     * @param theatreId the theatre id
+     * @return the movie by theatre
+     */
+    @RequestMapping(value = "/getMovies/{theatreId}", method = RequestMethod.GET)
+    public @ResponseBody List<Movie> getMovieByTheatre(@PathVariable("theatreId") String theatreId) {
+        List<Movie> movieList = movieService.getMoviesByTheatre(theatreId);
+        return movieList;
+
+    }
+
+    /**
+     * Gets the password.
+     *
+     * @param movieTheatreDTO the movie theatre DTO
+     * @return the show time
+     */
+    @RequestMapping(value = "/getShowtime", method = RequestMethod.POST)
+    public @ResponseBody List<String> getShowTime(@RequestBody MovieTheatreDTO movieTheatreDTO) {
+        List<String> timeList = movieService.getShowTime(movieTheatreDTO);
+        return timeList;
+
+    }
+
+    /**
+     * Gets the discount.
+     *
+     * @param movieTheatreDTO the movie theatre DTO
+     * @return the discount
+     */
+    @RequestMapping(value = "/getDiscount", method = RequestMethod.POST)
+    public ResponseEntity<Integer> getDiscount(@RequestBody MovieTheatreDTO movieTheatreDTO) {
+        int discount = movieService.getDiscount(movieTheatreDTO);
+        return ResponseEntity.ok().body(discount);
+
+    }
 }

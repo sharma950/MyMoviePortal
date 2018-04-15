@@ -13,82 +13,90 @@ import javax.persistence.Table;
 @Table(name = "movie")
 public class Movie {
 
-	/** The movie id. */
-	@Id
-	@Column(name = "movie_id")
-	private String movieId;
+    /** The movie id. */
+    @Id
+    @Column(name = "movie_id")
+    private String movieId;
 
-	/** The movie name. */
-	@Column(name = "movie_name")
-	private String movieName;
+    /** The movie name. */
+    @Column(name = "movie_name")
+    private String movieName;
 
-	/** The movie price. */
-	@Column(name = "movie_price")
-	private String moviePrice;
+    /** The movie price. */
+    @Column(name = "movie_price")
+    private String moviePrice;
 
-	/**
-	 * Instantiates a new movie.
-	 */
-	public Movie() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "movie_status")
+    private String movieStatus;
 
-	/**
-	 * Gets the movie id.
-	 *
-	 * @return the movie id
-	 */
-	public String getMovieId() {
-		return movieId;
-	}
+    /**
+     * Instantiates a new movie.
+     */
+    public Movie() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * Sets the movie id.
-	 *
-	 * @param movieId
-	 *            the new movie id
-	 */
-	public void setMovieId(String movieId) {
-		this.movieId = movieId;
-	}
+    /**
+     * Gets the movie id.
+     *
+     * @return the movie id
+     */
+    public String getMovieId() {
+        return movieId;
+    }
 
-	/**
-	 * Gets the movie name.
-	 *
-	 * @return the movie name
-	 */
-	public String getMovieName() {
-		return movieName;
-	}
+    /**
+     * Sets the movie id.
+     *
+     * @param movieId the new movie id
+     */
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
 
-	/**
-	 * Sets the movie name.
-	 *
-	 * @param movieName
-	 *            the new movie name
-	 */
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
-	}
+    /**
+     * Gets the movie name.
+     *
+     * @return the movie name
+     */
+    public String getMovieName() {
+        return movieName;
+    }
 
-	/**
-	 * Gets the movie price.
-	 *
-	 * @return the movie price
-	 */
-	public String getMoviePrice() {
-		return moviePrice;
-	}
+    /**
+     * Sets the movie name.
+     *
+     * @param movieName the new movie name
+     */
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
-	/**
-	 * Sets the movie price.
-	 *
-	 * @param moviePrice
-	 *            the new movie price
-	 */
-	public void setMoviePrice(String moviePrice) {
-		this.moviePrice = moviePrice;
-	}
+    /**
+     * Gets the movie price.
+     *
+     * @return the movie price
+     */
+    public String getMoviePrice() {
+        return moviePrice;
+    }
+
+    /**
+     * Sets the movie price.
+     *
+     * @param moviePrice the new movie price
+     */
+    public void setMoviePrice(String moviePrice) {
+        this.moviePrice = moviePrice;
+    }
+
+    public String getMovieStatus() {
+        return movieStatus;
+    }
+
+    public void setMovieStatus(String movieStatus) {
+        this.movieStatus = movieStatus;
+    }
 
 }

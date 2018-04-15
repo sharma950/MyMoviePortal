@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mymovieportal.model.Theatre;
-import com.mymovieportal.service.impl.TheatreServiceImpl;
+import com.mymovieportal.service.TheatreService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -21,52 +21,44 @@ import com.mymovieportal.service.impl.TheatreServiceImpl;
 @RequestMapping("/mymovieportal/theatre")
 public class TheatreController {
 
-	/** The theatre service impl. */
-	@Autowired
-	TheatreServiceImpl theatreServiceImpl;
+    /** The theatre service impl. */
+    @Autowired
+    TheatreService theatreService;
 
-	/**
-	 * Gets the.
-	 *
-	 * @param theatreId
-	 *            the theatre id
-	 * @return the response entity
-	 */
-	@RequestMapping(value = "/getTheatre/{theatreId}", method = RequestMethod.GET)
-	public ResponseEntity<Theatre> get(@PathVariable("theatreId") String theatreId) {
-		Theatre theatre = theatreServiceImpl.getTheatre(theatreId);
-		if (theatre != null) {
-			return ResponseEntity.ok().body(theatre);
-		} else {
-			Theatre theatre1 = new Theatre();
-			return ResponseEntity.ok().body(theatre1);
-		}
+    /**
+     * Gets the.
+     *
+     * @param theatreId the theatre id
+     * @return the response entity
+     */
+    @RequestMapping(value = "/getTheatre/{theatreId}", method = RequestMethod.GET)
+    public ResponseEntity<Theatre> get(@PathVariable("theatreId") String theatreId) {
+        Theatre theatre = theatreService.getTheatre(theatreId);
+        return ResponseEntity.ok().body(theatre);
+    }
 
-	}
+    /**
+     * Gets the theatres.
+     *
+     * @return the theatres
+     */
+    @RequestMapping(value = "/getTheatres", method = RequestMethod.GET)
+    public @ResponseBody List<Theatre> getTheatres() {
 
-	/**
-	 * Gets the theatres.
-	 *
-	 * @return the theatres
-	 */
-	@RequestMapping(value = "/getTheatres", method = RequestMethod.GET)
-	public @ResponseBody List<Theatre> getTheatres() {
+        List<Theatre> theatreList = theatreService.getTheatres();
+        return theatreList;
+    }
 
-		List<Theatre> theatreList = theatreServiceImpl.getTheatres();
-		return theatreList;
-	}
+    /**
+     * Gets the theatres by city.
+     *
+     * @param cityId the city id
+     * @return the theatres by city
+     */
+    @RequestMapping(value = "/getTheatres/{cityId}", method = RequestMethod.GET)
+    public @ResponseBody List<Theatre> getTheatresByCity(@PathVariable("cityId") String cityId) {
 
-	/**
-	 * Gets the theatres by city.
-	 *
-	 * @param cityId
-	 *            the city id
-	 * @return the theatres by city
-	 */
-	@RequestMapping(value = "/getTheatres/{cityId}", method = RequestMethod.GET)
-	public @ResponseBody List<Theatre> getTheatresByCity(@PathVariable("cityId") String cityId) {
-
-		List<Theatre> theatreList = theatreServiceImpl.getTheatresByCity(cityId);
-		return theatreList;
-	}
+        List<Theatre> theatreList = theatreService.getTheatresByCity(cityId);
+        return theatreList;
+    }
 }

@@ -10,21 +10,21 @@ import com.mymovieportal.model.SeatBooking;
  */
 public interface SeatBookingDAO {
 
-	/**
-	 * Gets the seat name.
-	 *
-	 * @param seatbooking
-	 *            the seatbooking
-	 * @return the seat name
-	 */
-	List<String> getSeatName(SeatBooking seatbooking);
+    /**
+     * Gets the seat name.
+     *
+     * @param seatbooking the seatbooking
+     * @return the seat name
+     */
+    List<String> getSeatName(SeatBooking seatbooking);
 
-	/**
-	 * Sets the seat name.
-	 *
-	 * @param seatbooking
-	 *            the seatbooking
-	 * @return the string
-	 */
-	String setSeatName(SeatBooking seatbooking);
+    /**
+     * Sets the seat name.
+     *
+     * @param seatbooking the seatbooking
+     * @return the seat booking
+     */
+    boolean setSeatName(SeatBooking[] seatbooking);
+
+    List<SeatBooking> getAllBookedSeat(String date, String time);
 }
